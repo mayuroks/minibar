@@ -8,6 +8,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 
 import com.mayurrokade.slidingalert.R;
+import com.mayurrokade.slidingalert.library.AlertInfo;
 import com.mayurrokade.slidingalert.library.SlidingAlertView;
 
 public class SlidingAlertActivity extends AppCompatActivity {
@@ -31,7 +32,13 @@ public class SlidingAlertActivity extends AppCompatActivity {
                     alertView.dismiss();
                 } else {
                     // show the view
-                    alertView.show();
+                    AlertInfo positiveAlert = new AlertInfo.Builder()
+                            .setBackgroundColor(R.color.colorSuccess)
+                            .setTextColor(android.R.color.white)
+                            .setMessage("This is cool")
+                            .build();
+
+                    alertView.show(positiveAlert);
                 }
             }
         });

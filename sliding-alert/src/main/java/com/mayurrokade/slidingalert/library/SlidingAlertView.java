@@ -3,9 +3,9 @@ package com.mayurrokade.slidingalert.library;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
-import android.os.Build;
+import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.ViewPropertyAnimator;
 import android.view.animation.Interpolator;
@@ -27,23 +27,19 @@ public class SlidingAlertView extends android.support.v7.widget.AppCompatTextVie
     private long mShowDuration = 500;
     private long mDismissDuration = 500;
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     public SlidingAlertView(Context context) {
         this(context, null);
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     public SlidingAlertView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     public SlidingAlertView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private void init() {
         setTranslationZ(zDepth);
     }
@@ -64,6 +60,20 @@ public class SlidingAlertView extends android.support.v7.widget.AppCompatTextVie
 
     public void setDismissInterpolator(Interpolator interpolator) {
         mDismissInterpolator = interpolator;
+    }
+
+    public void show(AlertInfo alertInfo) {
+        int bgColor = ContextCompat.getColor(getContext(),
+                alertInfo.getBackgroundColor());
+        int textColor = ContextCompat.getColor(getContext(),
+                alertInfo.getTextColor());
+        String message = alertInfo.getMessage();
+
+        setBackgroundColor(bgColor);
+        setTextColor(textColor);
+        setText(message);
+
+        show();
     }
 
     public void show() {
@@ -99,6 +109,7 @@ public class SlidingAlertView extends android.support.v7.widget.AppCompatTextVie
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
                         mIsShowing = false;
+                        resetAlertInfo();
 
                         // TODO give callback on alert hidden
                     }
@@ -120,10 +131,17 @@ public class SlidingAlertView extends android.support.v7.widget.AppCompatTextVie
             mIsShowing = false;
             setTranslationY(-mHeight);
             setAlpha(0);
+            resetAlertInfo();
         }
     }
 
     public boolean isShowing() {
         return mIsShowing;
+    }
+
+    private void resetAlertInfo() {
+        setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorSuccess));
+        setTextColor(ContextCompat.getColor(getContext(), R.color.colorTextRegular));
+        setText("");
     }
 }
