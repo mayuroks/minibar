@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorSuccess">#4CAF50</color>
+    <color name="colorError">#e53935</color>
+
+    <!-- Text colors -->
+    <color name="colorTextRegular">#CCCED0</color>
+    <color name="colorTextFaded">#797979</color>
+</resources>

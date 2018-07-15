@@ -6,14 +6,9 @@
 
     <com.mayurrokade.slidingalert.library.SlidingAlertView
         android:id="@+id/slidingAlertView"
+        style="@style/SlidingAlertViewCustom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:padding="16dp"
-        android:text="Yello"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="22sp" />
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/button"
