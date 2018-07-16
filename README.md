@@ -1,2 +1,2 @@
-# sliding-alert
-Sliding Alert - Show right alert at the right place.
+# Minibar
+Show right message at the right place.
