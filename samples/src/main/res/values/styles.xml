@@ -11,9 +11,19 @@
     <style name="MinibarViewCustom" parent="MinibarView">
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:background">@color/colorPrimary</item>
-        <item name="android:padding">16dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ButtonCustom" parent="Base.TextAppearance.AppCompat.Widget.Button">
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
     </style>
 
 </resources>

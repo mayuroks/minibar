@@ -16,8 +16,9 @@ public class SampleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample);
+        getSupportActionBar().setTitle("Minibar Demo");
 
-        Button button = findViewById(R.id.button);
+        final Button button = findViewById(R.id.button);
         final MinibarView alertView = findViewById(R.id.minibarView);
 
         alertView.setShowInterpolator(new DecelerateInterpolator());
@@ -28,13 +29,16 @@ public class SampleActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (alertView.isShowing()) {
                     // then dismiss
+                    button.setText("Show Message");
                     alertView.dismiss();
                 } else {
                     // show the view
+                    button.setText("Hide Message");
+
                     UserMessage positiveAlert = new UserMessage.Builder()
                             .setBackgroundColor(R.color.colorSuccess)
                             .setTextColor(android.R.color.white)
-                            .setMessage("This is cool")
+                            .setMessage("You have 128 unread messages.")
                             .build();
 
                     alertView.show(positiveAlert);
