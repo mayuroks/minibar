@@ -9,18 +9,18 @@ import android.util.AttributeSet;
 import android.view.ViewPropertyAnimator;
 import android.view.animation.Interpolator;
 
-import com.mayurrokade.minibar.R;
-
 /**
  * TODO disable setting zTranslation
  * TODO bouncing effect
  * TODO auto-dismiss, expose duration
  * TODO show / hide duration
- * TODO set min API 21 in gradle
  */
+
 public class MinibarView extends android.support.v7.widget.AppCompatTextView {
 
-    private boolean mIsShowing = true;
+    private static final String TAG = "MinibarView";
+
+    private boolean mIsShowing = false;
     private int mHeight;
     private ViewPropertyAnimator mAnimator;
     private float zDepth = -1000;
@@ -49,6 +49,11 @@ public class MinibarView extends android.support.v7.widget.AppCompatTextView {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         mHeight = getHeight();
+
+        if (!isShowing()) {
+            setTranslationY(-mHeight);
+            setAlpha(0);
+        }
     }
 
     public void setShowDuration(long duration) {
