@@ -1,10 +1,19 @@
-# Minibar
-Show right message at the right place.
-
-# Demo! Hell yeah!
-<p>
-  <image width="50%" height="50%" style="margin:40px;" src="https://github.com/mayuroks/minibar/blob/master/images/minibar_demo.gif"></image>
+<p align="center">
+  <image width="10%" height="10%" style="margin:40px;" src="https://github.com/mayuroks/minibar/blob/master/images/toast.png"></image>
 </p>
+
+<h1 align="center"> Minibar </h1>
+<h4 align="center">Show right message at the right place.</h4>
+
+Minibar is "minimal bar" android library that is built to quickly show user messages within the app. These messages could be success, error, notification or just plain info.
+
+Needless to say that, if you come across bugs, have feature requests or suggestions, feel free to create an issue or send a pull request.
+
+# Andddd Action!
+<p>
+  <image width="35%" height="35%" style="margin:40px;" src="https://github.com/mayuroks/minibar/blob/master/images/minibar_demo.gif"></image>
+</p>
+
 
 # Requirements
 Currently, this library is compatible with API 21(Lollipop) and above devices. I am working on figuring out ways to make it work on devices below that.
@@ -15,6 +24,7 @@ Coming soon via JitPack
 # Usage
 
 **Step 1** 
+
 Add MinibarView to your layout
 ```xml
 <com.mayurrokade.minibar.MinibarView
@@ -25,13 +35,14 @@ Add MinibarView to your layout
 ```
 
 **Step 2**
+
 Create a UserMessage and show it in MinibarView
 ```java
 final MinibarView minibarView = findViewById(R.id.minibarView);
 
 // Build the user message
 UserMessage userMessage = new UserMessage.Builder()
-                        .with(getApplicationContext())
+                        .with(mContext)
                         .setMessage("You have 128 unread messages.")
                         .setDuration(1000)
                         .build();
@@ -41,13 +52,14 @@ minibarView.show(userMessage);
 ```
 
 **Step 3**
+
 Nothing! That's right! Minibar is quick and easy to use.
 
 # Background and Text color
 You can set the background and textcolor of the user message with `setBackgroundColor()` and `setTextColor()` as follows:
 ```java
 UserMessage userMessage = new UserMessage.Builder()
-                        .with(getApplicationContext())
+                        .with(mContext)
                         .setBackgroundColor(R.color.colorSuccess)
                         .setTextColor(android.R.color.white)
                         .setMessage("You have 128 unread messages.")
@@ -59,7 +71,7 @@ UserMessage userMessage = new UserMessage.Builder()
 Minibar currently supports show and dismiss animation via Interpolators. You can use `setShowInterpolator()` and `setDismissInterpolator()` to animate the show and dismiss respectively.
 ```java
 UserMessage userMessage = new UserMessage.Builder()
-                        .with(getApplicationContext())
+                        .with(mContext)
                         .setBackgroundColor(R.color.colorSuccess)
                         .setTextColor(android.R.color.white)
                         .setMessage("You have 128 unread messages.")
