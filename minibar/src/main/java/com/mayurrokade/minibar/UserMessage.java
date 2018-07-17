@@ -20,13 +20,9 @@ public class UserMessage {
     private int textColor;
 
     private Context context;
-
     private String message;
-
     private long duration = 1000;
-
     private Interpolator dismissInterpolator = new DecelerateInterpolator();
-
     private Interpolator showInterpolator = new AccelerateInterpolator();
 
     public int getBackgroundColor() {
@@ -116,18 +112,15 @@ public class UserMessage {
     public static class Builder {
 
         @ColorRes
-        int backgroundColor;
+        private int backgroundColor;
 
         @ColorRes
-        int textColor;
+        private int textColor;
 
-        Context context;
-        String message;
-
+        private Context context;
+        private String message;
         private long duration;
-
         private Interpolator dismissInterpolator;
-
         private Interpolator showInterpolator;
 
         public Builder with(@NonNull Context context) {

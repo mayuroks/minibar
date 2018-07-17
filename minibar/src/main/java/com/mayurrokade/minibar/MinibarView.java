@@ -11,7 +11,7 @@ import android.view.ViewPropertyAnimator;
 
 /**
  * TODO disable setting zTranslation
- * TODO auto-dismiss, expose duration
+ * TODO implement queuing for rapid show() events
  */
 
 public class MinibarView extends android.support.v7.widget.AppCompatTextView {
