@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
+import android.view.animation.BounceInterpolator;
 import android.widget.Button;
 
 import com.mayurrokade.minibar.MinibarView;
@@ -21,8 +21,6 @@ public class SampleActivity extends AppCompatActivity {
         final Button button = findViewById(R.id.button);
         final MinibarView alertView = findViewById(R.id.minibarView);
 
-        alertView.setShowInterpolator(new DecelerateInterpolator());
-        alertView.setDismissInterpolator(new AccelerateInterpolator());
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,13 +33,15 @@ public class SampleActivity extends AppCompatActivity {
                     // show the view
                     button.setText("Hide Message");
 
-                    UserMessage positiveAlert = new UserMessage.Builder()
+                    UserMessage userMessage = new UserMessage.Builder()
                             .setBackgroundColor(R.color.colorSuccess)
                             .setTextColor(android.R.color.white)
                             .setMessage("You have 128 unread messages.")
+                            .setShowInterpolator(new BounceInterpolator())
+                            .setDismissInterpolator(new AccelerateInterpolator())
                             .build();
 
-                    alertView.show(positiveAlert);
+                    alertView.show(userMessage);
                 }
             }
         });

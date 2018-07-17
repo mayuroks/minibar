@@ -7,13 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.ViewPropertyAnimator;
-import android.view.animation.Interpolator;
 
 /**
  * TODO disable setting zTranslation
- * TODO bouncing effect
  * TODO auto-dismiss, expose duration
- * TODO show / hide duration
  */
 
 public class MinibarView extends android.support.v7.widget.AppCompatTextView {
@@ -24,9 +21,8 @@ public class MinibarView extends android.support.v7.widget.AppCompatTextView {
     private int mHeight;
     private ViewPropertyAnimator mAnimator;
     private float zDepth = -1000;
-    private Interpolator mShowInterpolator, mDismissInterpolator;
-    private long mShowDuration = 500;
     private long mDismissDuration = 500;
+    private UserMessage mUserMessage;
 
     public MinibarView(Context context) {
         this(context, null);
@@ -56,24 +52,14 @@ public class MinibarView extends android.support.v7.widget.AppCompatTextView {
         }
     }
 
-    public void setShowDuration(long duration) {
-        mShowDuration = duration;
-    }
-
-    public void setShowInterpolator(Interpolator interpolator) {
-        mShowInterpolator = interpolator;
-    }
-
-    public void setDismissInterpolator(Interpolator interpolator) {
-        mDismissInterpolator = interpolator;
-    }
-
     public void show(UserMessage userMessage) {
+        mUserMessage = userMessage;
+
         int bgColor = ContextCompat.getColor(getContext(),
-                userMessage.getBackgroundColor());
+                mUserMessage.getBackgroundColor());
         int textColor = ContextCompat.getColor(getContext(),
-                userMessage.getTextColor());
-        String message = userMessage.getMessage();
+                mUserMessage.getTextColor());
+        String message = mUserMessage.getMessage();
 
         setBackgroundColor(bgColor);
         setTextColor(textColor);
@@ -87,7 +73,7 @@ public class MinibarView extends android.support.v7.widget.AppCompatTextView {
         setAlpha(1);
         mIsShowing = true;
 
-        mAnimator.setDuration(mShowDuration)
+        mAnimator.setDuration(mUserMessage.getDuration())
                 .translationY(0)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
@@ -97,8 +83,8 @@ public class MinibarView extends android.support.v7.widget.AppCompatTextView {
                     }
                 });
 
-        if (mShowInterpolator != null) {
-            mAnimator.setInterpolator(mShowInterpolator);
+        if (mUserMessage.getShowInterpolator() != null) {
+            mAnimator.setInterpolator(mUserMessage.getShowInterpolator());
         }
 
         mAnimator.start();
@@ -115,14 +101,14 @@ public class MinibarView extends android.support.v7.widget.AppCompatTextView {
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
                         mIsShowing = false;
-                        resetAlertInfo();
+                        resetView();
 
                         // TODO give callback on alert hidden
                     }
                 });
 
-        if (mDismissInterpolator != null) {
-            mAnimator.setInterpolator(mDismissInterpolator);
+        if (mUserMessage.getDismissInterpolator() != null) {
+            mAnimator.setInterpolator(mUserMessage.getDismissInterpolator());
         }
 
         mAnimator.start();
@@ -137,7 +123,7 @@ public class MinibarView extends android.support.v7.widget.AppCompatTextView {
             mIsShowing = false;
             setTranslationY(-mHeight);
             setAlpha(0);
-            resetAlertInfo();
+            resetView();
         }
     }
 
@@ -145,7 +131,7 @@ public class MinibarView extends android.support.v7.widget.AppCompatTextView {
         return mIsShowing;
     }
 
-    private void resetAlertInfo() {
+    private void resetView() {
         setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorSuccess));
         setTextColor(ContextCompat.getColor(getContext(), R.color.colorTextRegular));
         setText("");
