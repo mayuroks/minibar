@@ -3,6 +3,7 @@ package com.mayurrokade.minibar;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -16,12 +17,12 @@ import android.view.ViewPropertyAnimator;
 public class MinibarView extends android.support.v7.widget.AppCompatTextView {
 
     private static final String TAG = "MinibarView";
-
     private boolean mIsShowing = false;
     private int mHeight;
     private ViewPropertyAnimator mAnimator;
     private float zDepth = -1000;
     private long mDismissDuration = 500;
+    private long mShowDuration = 500;
     private UserMessage mUserMessage;
 
     public MinibarView(Context context) {
@@ -73,13 +74,20 @@ public class MinibarView extends android.support.v7.widget.AppCompatTextView {
         setAlpha(1);
         mIsShowing = true;
 
-        mAnimator.setDuration(mUserMessage.getDuration())
+        mAnimator.setDuration(mShowDuration)
                 .translationY(0)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
-                        // TODO give callback on alert shown
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                dismiss();
+                            }
+                        }, mUserMessage.getDuration());
                     }
                 });
 
@@ -90,7 +98,7 @@ public class MinibarView extends android.support.v7.widget.AppCompatTextView {
         mAnimator.start();
     }
 
-    public void dismiss() {
+    private void dismiss() {
         mAnimator = animate();
 
         mAnimator.setDuration(mDismissDuration)
@@ -102,8 +110,6 @@ public class MinibarView extends android.support.v7.widget.AppCompatTextView {
                         super.onAnimationEnd(animation);
                         mIsShowing = false;
                         resetView();
-
-                        // TODO give callback on alert hidden
                     }
                 });
 
@@ -114,7 +120,7 @@ public class MinibarView extends android.support.v7.widget.AppCompatTextView {
         mAnimator.start();
     }
 
-    public void fastDismiss() {
+    private void fastDismiss() {
         if (isShowing()) {
             if (mAnimator != null) {
                 mAnimator.cancel();

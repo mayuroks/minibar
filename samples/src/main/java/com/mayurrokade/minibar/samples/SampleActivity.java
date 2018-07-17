@@ -19,30 +19,22 @@ public class SampleActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Minibar Demo");
 
         final Button button = findViewById(R.id.button);
-        final MinibarView alertView = findViewById(R.id.minibarView);
-
+        final MinibarView minibarView = findViewById(R.id.minibarView);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (alertView.isShowing()) {
-                    // then dismiss
-                    button.setText("Show Message");
-                    alertView.dismiss();
-                } else {
-                    // show the view
-                    button.setText("Hide Message");
+                UserMessage userMessage = new UserMessage.Builder()
+                        .with(getApplicationContext())
+//                        .setBackgroundColor(R.color.colorSuccess)
+//                        .setTextColor(android.R.color.white)
+                        .setMessage("You have 128 unread messages.")
+                        .setDuration(1000)
+//                        .setShowInterpolator(new BounceInterpolator())
+//                        .setDismissInterpolator(new AccelerateInterpolator())
+                        .build();
 
-                    UserMessage userMessage = new UserMessage.Builder()
-                            .setBackgroundColor(R.color.colorSuccess)
-                            .setTextColor(android.R.color.white)
-                            .setMessage("You have 128 unread messages.")
-                            .setShowInterpolator(new BounceInterpolator())
-                            .setDismissInterpolator(new AccelerateInterpolator())
-                            .build();
-
-                    alertView.show(userMessage);
-                }
+                minibarView.show(userMessage);
             }
         });
     }

@@ -1,6 +1,8 @@
 package com.mayurrokade.minibar;
 
+import android.content.Context;
 import android.support.annotation.ColorRes;
+import android.support.annotation.NonNull;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
@@ -16,6 +18,8 @@ public class UserMessage {
 
     @ColorRes
     private int textColor;
+
+    private Context context;
 
     private String message;
 
@@ -75,8 +79,26 @@ public class UserMessage {
 
     private UserMessage(Builder builder) {
         message = builder.message;
-        textColor = builder.textColor;
-        backgroundColor = builder.backgroundColor;
+
+        if (builder.context != null) {
+            context = builder.context;
+        } else {
+            throw new RuntimeException("Context cannot be null.");
+        }
+
+        if (builder.textColor == 0) {
+            // TODO need a better way to set default color
+            textColor = android.R.color.white;
+        } else {
+            textColor = builder.textColor;
+        }
+
+        if (builder.backgroundColor == 0) {
+            // TODO need a better way to set default color
+            backgroundColor = R.color.colorSuccess;
+        } else {
+            backgroundColor = builder.backgroundColor;
+        }
 
         if (builder.duration > 0) {
             duration = builder.duration;
@@ -92,12 +114,14 @@ public class UserMessage {
     }
 
     public static class Builder {
+
         @ColorRes
         int backgroundColor;
 
         @ColorRes
         int textColor;
 
+        Context context;
         String message;
 
         private long duration;
@@ -105,6 +129,11 @@ public class UserMessage {
         private Interpolator dismissInterpolator;
 
         private Interpolator showInterpolator;
+
+        public Builder with(@NonNull Context context) {
+            this.context = context;
+            return this;
+        }
 
         public Builder setBackgroundColor(@ColorRes int backgroundColor) {
             this.backgroundColor = backgroundColor;
