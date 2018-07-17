@@ -26,12 +26,12 @@ public class SampleActivity extends AppCompatActivity {
             public void onClick(View view) {
                 UserMessage userMessage = new UserMessage.Builder()
                         .with(getApplicationContext())
-//                        .setBackgroundColor(R.color.colorSuccess)
-//                        .setTextColor(android.R.color.white)
+                        .setBackgroundColor(R.color.colorSuccess)
+                        .setTextColor(android.R.color.white)
                         .setMessage("You have 128 unread messages.")
                         .setDuration(1000)
-//                        .setShowInterpolator(new BounceInterpolator())
-//                        .setDismissInterpolator(new AccelerateInterpolator())
+                        .setShowInterpolator(new BounceInterpolator())
+                        .setDismissInterpolator(new AccelerateInterpolator())
                         .build();
 
                 minibarView.show(userMessage);
