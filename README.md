@@ -1,42 +1,86 @@
 <p align="center">
-  <image width="10%" height="10%" style="margin:40px;" src="https://github.com/mayuroks/minibar/blob/master/images/toast.png"></image>
+  <image width="50%" height="50%";" src="https://github.com/mayuroks/minibar/blob/master/images/Minibar%20Banner_padding.png"></image>
 </p>
 
-<h1 align="center"> Minibar </h1>
-<h4 align="center">Show right message at the right place.</h4>
+## Background 🤔 🤔
+Minibar is "minimal bar" android library that is built to quickly show in-app user messages. These messages could be alert, notification or just plain info. By default, Android offers Notifications which can be used for the same purpose. But notifications don't give the "in-app" user experience. Minibar messages are shown and dismissed within the app's layout.
 
-Minibar is "minimal bar" android library that is built to quickly show user messages within the app. These messages could be success, error, notification or just plain info.
+I strongly feel that, the best way to display a message to user, is to display it at the top of the screen. Android doesn't provide anything that can acheive this. Android provides Snackbar, which by default, shows messages at the bottom. I have found that, messages shown at bottom are hard to read, distracting and annoying 😤.
 
-Needless to say that, if you come across bugs, have feature requests or suggestions, feel free to create an issue or send a pull request.
+This was the main motivation, to make a library that can show easy-to-read in-app messages to user. Needless to say that, if you come across bugs, have feature requests or suggestions, feel free to create an issue or send a pull request.
 
-# Andddd Action!
+## Contents 
+
+ - [Minibar in Action](#minibar-in-action)
+ - [API Requirements](#api-requirements)
+ - [Installation](#installation)
+ - [Usage](#usage)
+    - [Basic example](#basic-example)
+    - [Background and Text Color](#background-and-text-color)
+    - [Animations](#animations)
+    - [Styling](#styling)
+ - [What's next](#whats-next)
+ - [About the Author](#about-the-author)
+ - [LICENSE](#license)
+ 
+
+## Minibar in Action  🚀 🚀
+The top bar, that appears, shows the message and disaapers is the minibar.
+
 <p>
-  <image width="35%" height="35%" style="margin:40px;" src="https://github.com/mayuroks/minibar/blob/master/images/minibar_demo.gif"></image>
+  <image width="30%" height="30%" style="margin:40px;" src="https://github.com/mayuroks/minibar/blob/master/images/minibar_demo.gif"></image>
 </p>
 
 
-# Requirements
-Currently, this library is compatible with API 21(Lollipop) and above devices. I am working on figuring out ways to make it work on devices below that.
+## API Requirements
+Currently, this library is compatible with API 21(Lollipop) and above android versions. I am working on figuring out ways to make it work on android versions below Lollipop(21).
 
-# Installation
-Coming soon via JitPack
-
-# Usage
-
-**Step 1** 
-
-Add MinibarView to your layout
-```xml
-<com.mayurrokade.minibar.MinibarView
-    android:id="@+id/minibarView"
-    style="@style/MinibarViewCustom"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+## Installation
+To install Minibar, add JitPack to your `project/build.gradle` file
+```gradle
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" } // Add this line
+    }
+}
 ```
 
-**Step 2**
+Add Minibar as a dependency `app/build.gradle` file,
+```gradle
+dependencies {
+    ...
+    implementation 'com.github.mayuroks:minibar:0.1.0'
+}
+```
 
-Create a UserMessage and show it in MinibarView
+## Usage
+
+The best way to utilize Minibar, is to put it at the top in your layout file. Because if a user message is shown at the top, it becomes easy read.
+
+### Basic example
+**STEP 1:** Add `MinibarView` to your activity or fragment's layout
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.mayurrokade.minibar.MinibarView
+        android:id="@+id/minibarView"
+        style="@style/MinibarViewCustom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Rest of the layout -->
+
+</android.support.constraint.ConstraintLayout>
+```
+
+**STEP 2:** Create a `UserMessage` object and show it using `MinibarView`,
 ```java
 final MinibarView minibarView = findViewById(R.id.minibarView);
 
@@ -44,19 +88,17 @@ final MinibarView minibarView = findViewById(R.id.minibarView);
 UserMessage userMessage = new UserMessage.Builder()
                         .with(mContext)
                         .setMessage("You have 128 unread messages.")
-                        .setDuration(1000)
+                        .setDuration(3000)
                         .build();
 
 // Show the user message
 minibarView.show(userMessage);
 ```
 
-**Step 3**
+**STEP 3:** Sit back! Relax! And let Minibar do the rest.
 
-Nothing! That's right! Minibar is quick and easy to use.
-
-# Background and Text color
-You can set the background and textcolor of the user message with `setBackgroundColor()` and `setTextColor()` as follows:
+### Background and Text color
+BackgroundColor and textColor are the two key parameters that can be tweaked to create effective user messages. You can set the background and textcolor of the user message with `setBackgroundColor()` and `setTextColor()` as follows:
 ```java
 UserMessage userMessage = new UserMessage.Builder()
                         .with(mContext)
@@ -67,8 +109,8 @@ UserMessage userMessage = new UserMessage.Builder()
                         .build();
 ```
 
-# Animations
-Minibar currently supports show and dismiss animation via Interpolators. You can use `setShowInterpolator()` and `setDismissInterpolator()` to animate the show and dismiss respectively.
+### Animations
+Minibar currently supports show and dismiss animation via `Interpolator`s. You can use `setShowInterpolator()` and `setDismissInterpolator()` to animate the show and dismiss respectively.
 ```java
 UserMessage userMessage = new UserMessage.Builder()
                         .with(mContext)
@@ -81,10 +123,8 @@ UserMessage userMessage = new UserMessage.Builder()
                         .build();
 ```
 
-# Styling
-Styling minibar is quite easy.
-
-In your styles.xml, you can create
+### Styling
+Styling minibar is as easy as styling any other Android element. In your `styles.xml`, you can create
 ```xml
 <style name="MinibarViewCustom" parent="MinibarView">
     <item name="android:paddingTop">4dp</item>
@@ -103,7 +143,38 @@ And in the activity or fragment layout,
     android:layout_height="wrap_content" />
 ```
 
-# TODO
- - Unit Tests
- - Java docs
- - Improve README
+## What's next
+ - Add Unit Tests 
+ 
+## About the Author
+I’m an UX-first Android Developer, passionate about building great apps. If you like this library, show some ❤️ on:
+
+- [Medium](https://medium.com/@mayuroks)
+- [Github](https://github.com/mayuroks)
+- [Twitter](https://twitter.com/mayuroks)
+- [LinkedIn](https://linkedin.com/in/mayurrokade/)
+
+
+## LICENSE
+ ```text
+ MIT License
+
+Copyright (c) 2018 Mayur Rokade
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+ ```
