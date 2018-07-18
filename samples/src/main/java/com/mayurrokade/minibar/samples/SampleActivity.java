@@ -29,7 +29,7 @@ public class SampleActivity extends AppCompatActivity {
                         .setBackgroundColor(R.color.colorSuccess)
                         .setTextColor(android.R.color.white)
                         .setMessage("You have 128 unread messages.")
-                        .setDuration(3000)
+                        .setDuration(2000)
                         .setShowInterpolator(new BounceInterpolator())
                         .setDismissInterpolator(new AccelerateInterpolator())
                         .build();
