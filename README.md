@@ -5,7 +5,7 @@
 ## Background 🤔 🤔
 Minibar is "minimal bar" android library that is built to quickly show in-app user messages. These messages could be alert, notification or just plain info. By default, Android offers Notifications which can be used for the same purpose. But notifications don't give the "in-app" user experience. Minibar messages are shown and dismissed within the app's layout.
 
-I strongly feel that, the best way to display a message to user, is to display it at the top of the screen. Android doesn't provide anything that can acheive this. Android provides Snackbar, which by default, shows messages at the bottom. I have found that, messages shown at bottom are hard to read, distracting and annoying 😤.
+I strongly feel that, the best way to display a message to user, is to display it at the top of the screen. Android doesn't provide anything that can achieve this. Android provides Snackbar, which by default, shows messages at the bottom. I have found that, messages shown at bottom are hard to read, distracting and annoying 😤.
 
 This was the main motivation, to make a library that can show easy-to-read in-app messages to user. Needless to say that, if you come across bugs, have feature requests or suggestions, feel free to create an issue or send a pull request.
 
@@ -25,7 +25,7 @@ This was the main motivation, to make a library that can show easy-to-read in-ap
  
 
 ## Minibar in Action  🚀 🚀
-The top bar, that appears, shows the message and disaapers is the minibar.
+The top bar, that appears, shows the message and disappears is the minibar.
 
 <p>
   <image width="30%" height="30%" style="margin:40px;" src="https://github.com/mayuroks/minibar/blob/master/images/demo_dark.gif"></image>
@@ -57,13 +57,13 @@ Add Minibar as a dependency `app/build.gradle` file,
 ```gradle
 dependencies {
     ...
-    implementation 'com.github.mayuroks:minibar:0.1.0'
+    implementation 'com.github.mayuroks:minibar:0.1.1'
 }
 ```
 
 ## Usage
 
-The best way to utilize Minibar, is to put it at the top in your layout file. Because if a user message is shown at the top, it becomes easy read.
+The best way to utilize Minibar, is to put it at the top in your layout file. Because if a user message is shown at the top, it becomes easy to read.
 
 ### Basic example
 **STEP 1:** Add `MinibarView` to your activity or fragment's layout
