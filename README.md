@@ -28,7 +28,13 @@ This was the main motivation, to make a library that can show easy-to-read in-ap
 The top bar, that appears, shows the message and disaapers is the minibar.
 
 <p>
-  <image width="30%" height="30%" style="margin:40px;" src="https://github.com/mayuroks/minibar/blob/master/images/minibar_demo.gif"></image>
+  <image width="30%" height="30%" style="margin:40px;" src="https://github.com/mayuroks/minibar/blob/master/images/demo_dark.gif"></image>
+</p>
+
+###
+
+<p>
+  <image width="30%" height="30%" style="margin:40px;" src="https://github.com/mayuroks/minibar/blob/master/images/demo_light.gif"></image>
 </p>
 
 
