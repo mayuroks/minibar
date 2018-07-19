@@ -8,10 +8,14 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 
 /**
- * UserMessage model.
+ * This can be used to create a UserMessage object to show a message to the user.
+ * UserMessage allows you to customize the message's background color, text color,
+ * duration etc.
  */
 
 public class UserMessage {
+
+    private static final String EMPTY_STRING = "";
 
     @ColorRes
     private int backgroundColor;
@@ -25,56 +29,121 @@ public class UserMessage {
     private Interpolator dismissInterpolator = new DecelerateInterpolator();
     private Interpolator showInterpolator = new AccelerateInterpolator();
 
+    /**
+     * Get background color
+     *
+     * @return backgroundColor which is @ColorRes
+     */
     public int getBackgroundColor() {
         return backgroundColor;
     }
 
+    /**
+     * Set background color
+     *
+     * @param backgroundColor which is @ColorRes
+     */
     public void setBackgroundColor(int backgroundColor) {
         this.backgroundColor = backgroundColor;
     }
 
+    /**
+     * Get text color
+     *
+     * @return textColor which is @ColorRes
+     */
     public int getTextColor() {
         return textColor;
     }
 
+    /**
+     * Set text color
+     *
+     * @param textColor which is @ColorRes
+     */
     public void setTextColor(int textColor) {
         this.textColor = textColor;
     }
 
+    /**
+     * Get message
+     *
+     * @return message which is a String
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * Set message
+     *
+     * @param message which is a String
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
+    /**
+     * Get duration
+     *
+     * @return duration which is a long
+     */
     public long getDuration() {
         return duration;
     }
 
+    /**
+     * Set duration
+     *
+     * @param duration which is a long
+     */
     public void setDuration(long duration) {
         this.duration = duration;
     }
 
+    /**
+     * Get showInterpolator
+     *
+     * @return showInterpolator which a {@link Interpolator}
+     */
     public Interpolator getShowInterpolator() {
         return showInterpolator;
     }
 
+    /**
+     * Set showInterpolator
+     *
+     * @param showInterpolator which is a {@link Interpolator}
+     */
     public void setShowInterpolator(Interpolator showInterpolator) {
         this.showInterpolator = showInterpolator;
     }
 
+    /**
+     * Get dismissInterpolator
+     *
+     * @return dismissInterpolator which is a {@link Interpolator}
+     */
     public Interpolator getDismissInterpolator() {
         return dismissInterpolator;
     }
 
+    /**
+     * Set dismissInterpolator
+     *
+     * @param dismissInterpolator which is a {@link Interpolator}
+     */
     public void setDismissInterpolator(Interpolator dismissInterpolator) {
         this.dismissInterpolator = dismissInterpolator;
     }
 
+    // Prevent direct instantiation
     private UserMessage(Builder builder) {
-        message = builder.message;
+        if (builder.message != null) {
+            message = builder.message;
+        } else {
+            message = EMPTY_STRING;
+        }
 
         if (builder.context != null) {
             context = builder.context;
@@ -109,6 +178,9 @@ public class UserMessage {
         }
     }
 
+    /**
+     * Use this to build and customize UserMessage
+     */
     public static class Builder {
 
         @ColorRes

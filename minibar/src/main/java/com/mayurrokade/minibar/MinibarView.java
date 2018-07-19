@@ -39,6 +39,7 @@ public class MinibarView extends android.support.v7.widget.AppCompatTextView {
     }
 
     private void init() {
+        // Put the element behind all views to hide the Y translation.
         setTranslationZ(zDepth);
     }
 
@@ -53,6 +54,11 @@ public class MinibarView extends android.support.v7.widget.AppCompatTextView {
         }
     }
 
+    /**
+     * Show the message in {@link MinibarView}
+     *
+     * @param userMessage
+     */
     public void show(UserMessage userMessage) {
         mUserMessage = userMessage;
 
@@ -69,7 +75,7 @@ public class MinibarView extends android.support.v7.widget.AppCompatTextView {
         show();
     }
 
-    public void show() {
+    private void show() {
         mAnimator = animate();
         setAlpha(1);
         mIsShowing = true;
@@ -133,7 +139,7 @@ public class MinibarView extends android.support.v7.widget.AppCompatTextView {
         }
     }
 
-    public boolean isShowing() {
+    private boolean isShowing() {
         return mIsShowing;
     }
 
